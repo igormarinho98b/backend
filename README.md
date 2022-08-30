@@ -26,6 +26,16 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+
+## Setup
+
+Para iniciar o projeto pela primeira vez, é necessário que você tenha instalado o docker + docker-compose e rode antes de mais nada o comando abaixo:
+
+```bash
+$ docker-compose up
+```
+
+Criar uma tabela no mariaDb ex "my-finances"
 ## Installation
 
 ```bash
