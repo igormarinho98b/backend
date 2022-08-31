@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { MyFinanceController } from './my-finance.controller';
-import { MyFinanceModule } from './my-finance.module';
+import { MyFinanceController } from './my-finances.controller';
+import { MyFinanceModule } from './my-finances.module';
 import { UsersService } from './services/users.service';
 
 @Module({

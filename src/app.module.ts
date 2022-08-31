@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { dataBaseConfig } from './infra/database.config';
-import { MyFinanceModule } from './infra/database/my-finance/my-finance.module';
+import { MyFinanceModule } from './infra/database/my-finances/my-finances.module';
+import { dataBaseConfig } from './infra/database/database.config';
 
 
 @Module({

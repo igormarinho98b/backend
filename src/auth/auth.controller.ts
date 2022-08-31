@@ -1,6 +1,6 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UsersService } from '../infra/database/my-finance/services/users.service';
+import { UsersService } from '../infra/database/my-finances/services/users.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
 import { SignUpDto } from './dtos/signup.dto';

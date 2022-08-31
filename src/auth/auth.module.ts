@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthConfig } from './auth.config';
 import { AuthController } from './auth.controller';
-import { MyFinanceHttpModule } from '../infra/database/my-finance/my-finance-http.module';
-import { UsersService } from '../infra/database/my-finance/services/users.service';
+import { MyFinanceHttpModule } from '../infra/database/my-finances/my-finances-http.module';
+import { UsersService } from '../infra/database/my-finances/services/users.service';
 
 
 @Module({
