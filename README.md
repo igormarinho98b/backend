@@ -29,13 +29,14 @@
 
 ## Setup
 
-Para iniciar o projeto pela primeira vez, é necessário que você tenha instalado o docker + docker-compose e rode antes de mais nada o comando abaixo:
+Para iniciar o projeto pela primeira vez, é necessário que você tenha instalado o docker + docker-compose, após realizar a instalação digitar o comando docker-compose up para subir o container":
 
+Quando o container estiver rodando para a primeira conexão será necessário criar uma tabela no Banco de dados mariaDb ex: "my-finances
+
+## Subindo o container do docker
 ```bash
 $ docker-compose up
 ```
-
-Criar uma tabela no mariaDb ex "my-finances"
 ## Installation
 
 ```bash

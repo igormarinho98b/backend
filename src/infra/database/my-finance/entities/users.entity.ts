@@ -1,8 +1,7 @@
 import { IsBoolean, IsEmail, IsString } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-
 export class Users{
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -15,10 +14,10 @@ export class Users{
   @Column()
   email: string;
   
-  @IsBoolean()
+  @IsString()
   @Column()
-  statusCognito: boolean;
+  cognitoClientId: string;
 
-  @Column()
+  @CreateDateColumn()
   createdAt:Date;
 }

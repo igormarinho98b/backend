@@ -3,14 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataBaseConfig } from './infra/database.config';
 import { MyFinanceModule } from './infra/database/my-finance/my-finance.module';
-import { DatabaseModule } from './infra/database.module';
-import { usersProviders } from './infra/database/my-finance/users.provider';
-import { UsersService } from './infra/database/my-finance/users.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-
-
 
 
 @Module({
@@ -19,10 +14,10 @@ import { AuthService } from './auth/auth.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    DatabaseModule,
+    TypeOrmModule.forRoot(dataBaseConfig),
     MyFinanceModule,
   ],
   controllers: [AppController],
-  providers: [AppService,...usersProviders,UsersService],
+  providers: [AppService],
 })
 export class AppModule {}
