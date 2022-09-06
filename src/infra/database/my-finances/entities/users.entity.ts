@@ -20,6 +20,5 @@ export class Users{
   cognitoClientId: string;
 
   @CreateDateColumn()
-  createdAt:Date;
-
+  createdAt: Date;
 }
