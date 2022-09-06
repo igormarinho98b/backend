@@ -8,9 +8,9 @@ services:
     volumes:
       - ./data:/var/lib/mysql
     environment:
-      MYSQL_DB_NAME: DB_myfinance
+      MYSQL_DB_NAME: DB_myfinances
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_PASSWORD : root
+      MYSQL_PASSWORD: root
       MYSQL_HOST: localhost
     ports:
       - 3306:3306

@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MyFinanceModule } from './infra/database/my-finances/my-finances.module';
 import { dataBaseConfig } from './infra/database/database.config';
+import { CategoriesModule } from './categories/categories.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { dataBaseConfig } from './infra/database/database.config';
     }),
     TypeOrmModule.forRoot(dataBaseConfig),
     MyFinanceModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

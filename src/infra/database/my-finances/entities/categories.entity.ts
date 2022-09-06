@@ -1,4 +1,5 @@
-import { IsBoolean, IsEmail, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -7,22 +8,18 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Users {
+export class Categories {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @IsString()
   @Column()
   name: string;
 
-  @IsEmail()
-  @Column()
-  email: string;
-
-  @IsString()
-  @Column()
-  cognitoClientId: string;
-
   @CreateDateColumn()
   createdAt: Date;
+
+  @CreateDateColumn()
+  updatedAt: Date;
 }
