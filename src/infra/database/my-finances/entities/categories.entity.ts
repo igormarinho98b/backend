@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { IncomeHistory } from './income-history.entity';
 
 @Entity()
 export class Categories {
@@ -23,4 +25,5 @@ export class Categories {
   @CreateDateColumn()
   updatedAt: Date;
   
+  @OneToMany(type => IncomeHistory, incomeHistory => incomeHistory.categoriesId) incomeHistory: IncomeHistory[];   
 }

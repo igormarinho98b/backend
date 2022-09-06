@@ -8,4 +8,6 @@ export class IncomeDto {
   readonly value: number;
   @ApiProperty()
   readonly userId: string;
+  @ApiProperty()
+  readonly categoriesId:string
 }

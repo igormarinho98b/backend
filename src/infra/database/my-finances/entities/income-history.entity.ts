@@ -33,4 +33,5 @@ export class IncomeHistory{
   updatedAt:Date;
 
   @ManyToOne(type => User, user => user.id) user: User; 
+  @ManyToOne(type => Categories, categories => categories.id) categories: Categories; 
 }
