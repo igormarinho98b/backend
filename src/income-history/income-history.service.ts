@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeepPartial, In, Repository } from 'typeorm';
-import { IncomeDto } from '../dtos/Income.dto';
-import { UserDto } from '../dtos/user.dto';
-import { IncomeHistory } from '../entities/income-history.entity';
-import { Users } from '../entities/users.entity';
+import { IncomeDto } from '../infra/database/my-finances/dtos/Income.dto';
+import { Repository } from 'typeorm';
+import { IncomeHistory } from '../infra/database/my-finances/entities/income-history.entity';
 
 @Injectable()
 export class IncomeHistoryService {

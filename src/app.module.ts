@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MyFinanceModule } from './infra/database/my-finances/my-finances.module';
 import { dataBaseConfig } from './infra/database/database.config';
 import { CategoriesModule } from './categories/categories.module';
+import { IncomeHistoryModule } from './income-history/income-history.module';
 
 
 @Module({
@@ -18,6 +19,7 @@ import { CategoriesModule } from './categories/categories.module';
     TypeOrmModule.forRoot(dataBaseConfig),
     MyFinanceModule,
     CategoriesModule,
+    IncomeHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
