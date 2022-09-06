@@ -1,6 +1,6 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UsersService } from '../infra/database/my-finances/services/users.service';
+import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
 import { SignUpDto } from './dtos/signup.dto';
@@ -10,13 +10,15 @@ import { SignUpDto } from './dtos/signup.dto';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly usersService: UsersService,
+    private readonly userService: UserService,
   ) {}
 
   @Post('login')
   async login(@Body() authenticateRequest: AuthDto) {
     try {
-      return await this.authService.authenticateUser(authenticateRequest);
+       const respose:any = await this.authService.authenticateUser(authenticateRequest);
+       const userId = await this.userService.getUserIdByCognitoId(respose.aud)
+       return {respose,userId}
     } catch (e) {
       throw new BadRequestException(e.message);
     }
@@ -25,6 +27,7 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupRequest: SignUpDto) {
     try {
+      let userId
       const response: any = await this.authService.signupUser(signupRequest);
 
       if (response) {
@@ -33,9 +36,10 @@ export class AuthController {
           email: signupRequest.email,
           cognitoClientId: response.pool.clientId,
         };
-        await this.usersService.create(data);
+       const user:any =  await this.userService.create(data);
+       userId = user.id
       }
-      return response;
+      return {response,userId};
     } catch (e) {
       throw new BadRequestException(e.message);
     }

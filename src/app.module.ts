@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MyFinanceModule } from './infra/database/my-finances/my-finances.module';
 import { dataBaseConfig } from './infra/database/database.config';
 import { CategoriesModule } from './categories/categories.module';
+import { IncomeHistoryModule } from './income-history/income-history.module';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -16,8 +17,9 @@ import { CategoriesModule } from './categories/categories.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(dataBaseConfig),
-    MyFinanceModule,
     CategoriesModule,
+    IncomeHistoryModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
