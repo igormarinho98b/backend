@@ -1,25 +1,26 @@
-import {IsEmail, IsString } from "class-validator";
+import { UUIDVersion } from "class-validator";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
-export class Users{
+
+export class IncomeHistory{
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @IsString()
   @Column()
-  name: string;
+  description:string
 
-  @IsEmail()
   @Column()
-  email: string;
-  
-  @IsString()
+  value:number
+
   @Column()
-  cognitoClientId: string;
+  userId:string
 
   @CreateDateColumn()
   createdAt:Date;
+
+  @CreateDateColumn()
+  updatedAt:Date;
 
 }
