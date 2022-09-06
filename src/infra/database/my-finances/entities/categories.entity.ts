@@ -22,4 +22,5 @@ export class Categories {
 
   @CreateDateColumn()
   updatedAt: Date;
+  
 }

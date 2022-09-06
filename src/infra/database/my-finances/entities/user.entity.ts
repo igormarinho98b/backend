@@ -1,9 +1,10 @@
 import {IsEmail, IsString } from "class-validator";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { IncomeHistory } from "./income-history.entity";
 
 
 @Entity()
-export class Users{
+export class User{
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -21,4 +22,6 @@ export class Users{
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(type => IncomeHistory, incomeHistory => incomeHistory.userId) incomeHistory: IncomeHistory[];  
 }

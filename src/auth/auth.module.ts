@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthConfig } from './auth.config';
 import { AuthController } from './auth.controller';
-import { MyFinanceHttpModule } from '../infra/database/my-finances/my-finances-http.module';
-import { UsersService } from '../infra/database/my-finances/services/users.service';
+import { UserService } from '../user/user.service';
+import { UserModule } from '../user/user.module';
+
 
 @Module({
-  imports: [MyFinanceHttpModule],
-  providers: [AuthService, AuthConfig, UsersService],
+  imports: [UserModule],
+  providers: [AuthService, AuthConfig, UserService],
   controllers: [AuthController],
 })
 export class AuthModule {}

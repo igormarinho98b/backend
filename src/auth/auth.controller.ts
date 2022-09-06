@@ -1,6 +1,6 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UsersService } from '../infra/database/my-finances/services/users.service';
+import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dtos/auth.dto';
 import { SignUpDto } from './dtos/signup.dto';
@@ -10,7 +10,7 @@ import { SignUpDto } from './dtos/signup.dto';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly usersService: UsersService,
+    private readonly userService: UserService,
   ) {}
 
   @Post('login')
@@ -33,7 +33,7 @@ export class AuthController {
           email: signupRequest.email,
           cognitoClientId: response.pool.clientId,
         };
-        await this.usersService.create(data);
+        await this.userService.create(data);
       }
       return response;
     } catch (e) {
