@@ -15,4 +15,9 @@ export class UserService {
   async create(data: UserDto): Promise<UserDto> {
     return await this.usersRepository.save(data);
   }
+
+  async getUserIdByCognitoId(id: string): Promise<any> {
+    const response = await this.usersRepository.findOne({where:{cognitoClientId:id}});
+    return response.id
+  }
 }
