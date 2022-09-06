@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { IncomeHistoryService } from './income-history.service';
 import { ApiTags } from '@nestjs/swagger';
 import { IncomeDto } from './dtos/Income.dto';
@@ -20,6 +20,24 @@ export class IncomeHistoryController {
   async getAllIncomeById(@Param('id') id: string) {
     try {
       return await this.incomeHistoryService.findAll(id);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Delete(':id')
+  async DeleteIncomeById(@Param('id') id: string) {
+    try {
+      return await this.incomeHistoryService.delete(id);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
+
+  @Patch(':id')
+  async UpdateIncomeById(@Param('id') id: string,@Body() data: IncomeDto) {
+    try {
+      return await this.incomeHistoryService.update(id,data);
     } catch (e) {
       throw new BadRequestException(e.message);
     }

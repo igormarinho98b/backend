@@ -15,10 +15,39 @@ export class IncomeHistoryService {
     return this.incomeHistoryRepository.save(data);
   }
 
-  async findAll(id:any): Promise<IncomeHistory[]> {
+  async findAll(id:string): Promise<IncomeHistory[]> {
     return await this.incomeHistoryRepository.find({
       select: ['id', 'value','description'],
       where: { userId: id },
     });
   }
+
+  async update(id:string,data:any): Promise<any> {
+    const result:any = await this.incomeHistoryRepository.createQueryBuilder()
+    .update(data)
+    .where({
+        id
+    })
+    .execute()
+    
+    if(result.affected === 0){
+      throw new Error(`There is no income to update with the id ${id}`)
+     }
+     return result
+   }
+    
+
+  async delete(id:string): Promise<string> {
+   const income =  await this.incomeHistoryRepository.createQueryBuilder()
+    .delete()
+    .from(IncomeHistory)
+    .where("id = :id", { id })
+    .execute();
+
+    if(income.affected === 0){
+     throw new Error(`There is no income to exclude with the id ${id}`)
+    }
+    return `Income successfully deleted`   
+  }
 }
+
