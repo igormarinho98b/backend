@@ -8,7 +8,10 @@ import { SignUpDto } from './dtos/signup.dto';
 @ApiTags('Auth')
 @Controller('api/v1/auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService,private readonly usersService:UsersService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post('login')
   async login(@Body() authenticateRequest: AuthDto) {
@@ -22,14 +25,17 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupRequest: SignUpDto) {
     try {
-     
-      const response:any = await this.authService.signupUser(signupRequest);
-    
-      if(response){
-        const data = {name: signupRequest.name,email:signupRequest.email,cognitoClientId:response.pool.clientId}
-        await this.usersService.create(data)
+      const response: any = await this.authService.signupUser(signupRequest);
+
+      if (response) {
+        const data = {
+          name: signupRequest.name,
+          email: signupRequest.email,
+          cognitoClientId: response.pool.clientId,
+        };
+        await this.usersService.create(data);
       }
-      return response
+      return response;
     } catch (e) {
       throw new BadRequestException(e.message);
     }
