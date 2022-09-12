@@ -6,9 +6,12 @@ global['fetch'] = require('node-fetch');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
 
   const config = new DocumentBuilder()
+    .addSecurity('bearer', {
+      type: 'http',
+      scheme: 'bearer',
+    })
     .setTitle('MyFinances')
     .setDescription('The MyFinances API description')
     .setVersion('1.0')
