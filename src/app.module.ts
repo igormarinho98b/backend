@@ -8,6 +8,7 @@ import { dataBaseConfig } from './infra/database/database.config';
 import { CategoriesModule } from './categories/categories.module';
 import { IncomeHistoryModule } from './income-history/income-history.module';
 import { UserModule } from './user/user.module';
+import { OutcomeHistoryModule } from './outcome-history/outcome-history.module';
 
 
 @Module({
@@ -20,6 +21,7 @@ import { UserModule } from './user/user.module';
     CategoriesModule,
     IncomeHistoryModule,
     UserModule,
+    OutcomeHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
