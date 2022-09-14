@@ -1,13 +1,26 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { IncomeHistoryService } from './income-history.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IncomeDto } from './dtos/Income.dto';
+import { AuthGuard } from '@nestjs/passport';
 
+@ApiBearerAuth()
 @ApiTags('Income')
 @Controller('api/v1/income')
 export class IncomeHistoryController {
-  constructor(private incomeHistoryService: IncomeHistoryService){}
+  constructor(private incomeHistoryService: IncomeHistoryService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('create')
   async createIncome(@Body() data: IncomeDto) {
     try {
@@ -16,6 +29,8 @@ export class IncomeHistoryController {
       throw new BadRequestException(e.message);
     }
   }
+
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async getAllIncomeById(@Param('id') id: string) {
     try {
@@ -25,6 +40,7 @@ export class IncomeHistoryController {
     }
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async DeleteIncomeById(@Param('id') id: string) {
     try {
@@ -34,10 +50,11 @@ export class IncomeHistoryController {
     }
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
-  async UpdateIncomeById(@Param('id') id: string,@Body() data: IncomeDto) {
+  async UpdateIncomeById(@Param('id') id: string, @Body() data: IncomeDto) {
     try {
-      return await this.incomeHistoryService.update(id,data);
+      return await this.incomeHistoryService.update(id, data);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
