@@ -1,7 +1,11 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { OutcomeDto } from './dtos/outcome.dto';
 import { OutcomeHistoryService } from './outcome-history.service';
 
+
+@ApiBearerAuth()
+@ApiTags('Outcome')
 @Controller('api/v1/outcome')
 export class OutcomeHistoryController {
   constructor(private outcomeHistoryService: OutcomeHistoryService){}
