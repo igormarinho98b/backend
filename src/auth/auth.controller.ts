@@ -16,9 +16,13 @@ export class AuthController {
   @Post('login')
   async login(@Body() authenticateRequest: AuthDto) {
     try {
-       const respose:any = await this.authService.authenticateUser(authenticateRequest);
-       const userId = await this.userService.getUserIdByCognitoId(respose.aud)
-       return {respose,userId}
+      const response: any = await this.authService.authenticateUser(
+        authenticateRequest,
+      );
+      const userId = await this.userService.getUserIdByCognitoId(response.aud);
+      const token = response.idToken;
+
+      return { token, userId };
     } catch (e) {
       throw new BadRequestException(e.message);
     }
@@ -27,7 +31,7 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupRequest: SignUpDto) {
     try {
-      let userId
+      let userId;
       const response: any = await this.authService.signupUser(signupRequest);
 
       if (response) {
@@ -36,10 +40,10 @@ export class AuthController {
           email: signupRequest.email,
           cognitoClientId: response.pool.clientId,
         };
-       const user:any =  await this.userService.create(data);
-       userId = user.id
+        const user: any = await this.userService.create(data);
+        userId = user.id;
       }
-      return {response,userId};
+      return { response, userId };
     } catch (e) {
       throw new BadRequestException(e.message);
     }

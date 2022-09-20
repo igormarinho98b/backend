@@ -31,7 +31,7 @@ export class AuthService {
         password,
         [
           new CognitoUserAttribute({
-            Name: 'name',
+            Name: 'preferred_username',
             Value: name,
           }),
         ],

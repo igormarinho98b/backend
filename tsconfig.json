@@ -20,5 +20,5 @@
   },
   "compileOnSave": true,
     "exclude": ["node_modules/"],
-    "include": ["main.ts"]
+    "include": ["./src/main.ts"]
 }
