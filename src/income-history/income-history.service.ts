@@ -49,5 +49,13 @@ export class IncomeHistoryService {
     }
     return `Income successfully deleted`   
   }
+  async balanceIncome(id:string): Promise<number> {
+    const incomecomes:any = await this.incomeHistoryRepository
+    .createQueryBuilder("incocome_history")
+    .where("incocome_history.userId = :userId", { userId: id })
+    .getMany()
+
+    return incomecomes.map((income)=>income.value).reduce((values,total)=>values +total)
+  }
 }
 

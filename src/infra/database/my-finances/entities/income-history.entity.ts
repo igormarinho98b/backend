@@ -19,6 +19,10 @@ export class IncomeHistory{
   value:number
 
   @ApiProperty()
+  @Column({ nullable: false})
+  date:string
+
+  @ApiProperty()
   @Column()
   userId:string
 

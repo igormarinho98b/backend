@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MoreThanOrEqual, Repository } from 'typeorm';
 import { OutcomeHistory } from '../infra/database/my-finances/entities/outcome-history.entity';
 import { OutcomeDto } from './dtos/outcome.dto';
 
@@ -20,6 +20,7 @@ export class OutcomeHistoryService {
       select: ['id', 'value','description'],
       where: { userId: id },
     });
+    
   }
 
   async update(id:string,data:any): Promise<any> {
@@ -48,5 +49,14 @@ export class OutcomeHistoryService {
      throw new Error(`There is no outcome to exclude with the id ${id}`)
     }
     return `Outcome successfully deleted`   
+  }
+
+  async balanceOutcome(id:string): Promise<number> {
+    const outcomes:any = await this.outcomeHistoryRepository
+    .createQueryBuilder("outcome_history")
+    .where("outcome_history.userId = :userId", { userId: id })
+    .getMany()
+
+    return outcomes.map((outcome)=>outcome.value).reduce((values,total)=>values +total)
   }
 }

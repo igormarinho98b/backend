@@ -7,6 +7,8 @@ export class IncomeDto {
   @ApiProperty()
   readonly value: number;
   @ApiProperty()
+  readonly date: string;
+  @ApiProperty()
   readonly userId: string;
   @ApiProperty()
   readonly categoriesId:string
