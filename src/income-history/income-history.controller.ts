@@ -59,4 +59,13 @@ export class IncomeHistoryController {
       throw new BadRequestException(e.message);
     }
   }
+
+  @Get('balance/:id')
+  async getBalanceOutcome(@Param('id') id: string) {
+    try {
+      return await this.incomeHistoryService.balanceIncome(id);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+  }
 }
