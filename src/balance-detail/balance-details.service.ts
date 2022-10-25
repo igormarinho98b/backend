@@ -12,32 +12,32 @@ export class BalanceDetailsService {
     private incomeHistoryRepository: Repository<IncomeHistory>,
     @InjectRepository(OutcomeHistory)
     private outcomeHistoryRepository: Repository<OutcomeHistory>,
-  ) {
-
-  }
+  ) { }
 
   async findAll(userId: string): Promise<BalanceDetailsDto[]> {
-    let formatOutcome
-    let formatIncome 
+    let formatOutcomes
+    let formatIncomes
+    let resultoderBalances
 
     const getOutcomes = await this.getOutcomeHistory(userId)
 
       if(getOutcomes.length > 0){
-        formatOutcome = this.mapperFormat(getOutcomes,'outcome')
+        formatOutcomes = this.mapperToFormatBalances(getOutcomes,'outcome')
       }
 
     const getIncomes = await this.getIncomeHistory(userId)
+
       if(getIncomes.length > 0){
-         formatIncome =  this.mapperFormat(getIncomes,'income')
+         formatIncomes = this.mapperToFormatBalances(getIncomes,'income')
       }
     
-    let result = formatOutcome.concat(formatIncome)
+     resultoderBalances = formatOutcomes.concat(formatIncomes)
 
-    const oderByDate = result.sort((a, b) => {
+    const oderBalancesByDate = resultoderBalances.sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
     
-    return oderByDate
+    return oderBalancesByDate
   }
 
   private async getOutcomeHistory(id:string):Promise<OutcomeHistory[]>{
@@ -55,8 +55,8 @@ export class BalanceDetailsService {
 
    }
 
-  private mapperFormat(balances,type){
-    const result =  balances.map((balance => {
+  private mapperToFormatBalances(balances,type){
+    const resultBalances =  balances.map((balance => {
       return {
         id: balance.id,
         description:balance.description,
@@ -67,7 +67,7 @@ export class BalanceDetailsService {
         type:type
       }}))
 
-      return result
+      return resultBalances
   }
 
 }
