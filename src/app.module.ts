@@ -9,6 +9,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { IncomeHistoryModule } from './income-history/income-history.module';
 import { UserModule } from './user/user.module';
 import { OutcomeHistoryModule } from './outcome-history/outcome-history.module';
+import { BalanceDetailsModule } from './balance-detail/balance-details.module';
 
 
 @Module({
@@ -22,6 +23,7 @@ import { OutcomeHistoryModule } from './outcome-history/outcome-history.module';
     IncomeHistoryModule,
     UserModule,
     OutcomeHistoryModule,
+    BalanceDetailsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
