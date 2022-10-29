@@ -18,37 +18,37 @@ export class OutcomeHistoryController {
       throw new BadRequestException(e.message);
     }
   }
-  @Get(':id')
-  async getAllOutcomeById(@Param('id') id: string) {
+  @Get(':userId')
+  async getAllOutcomeById(@Param('userId') userId: string) {
     try {
-      return await this.outcomeHistoryService.findAll(id);
+      return await this.outcomeHistoryService.findAll(userId);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
-  @Delete(':id')
-  async DeleteOutcomeById(@Param('id') id: string) {
+  @Delete(':outcomeId')
+  async DeleteOutcomeById(@Param('outcomeId') outcomeId: string) {
     try {
-      return await this.outcomeHistoryService.delete(id);
+      return await this.outcomeHistoryService.delete(outcomeId);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
-  @Patch(':id')
-  async UpdateOutcomeById(@Param('id') id: string,@Body() data: OutcomeDto) {
+  @Patch(':outcomeId')
+  async UpdateOutcomeById(@Param('outcomeId') outcomeId: string,@Body() data: OutcomeDto) {
     try {
-      return await this.outcomeHistoryService.update(id,data);
+      return await this.outcomeHistoryService.update(outcomeId,data);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
-  @Get('balance/:id')
-  async getBalanceOutcome(@Param('id') id: string) {
+  @Get('balance/:userId')
+  async getBalanceOutcome(@Param('userId') userId: string) {
     try {
-      return await this.outcomeHistoryService.balanceOutcome(id);
+      return await this.outcomeHistoryService.balanceOutcome(userId);
     } catch (e) {
       throw new BadRequestException(e.message);
     }

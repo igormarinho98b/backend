@@ -31,37 +31,37 @@ export class IncomeHistoryController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get(':id')
-  async getAllIncomeById(@Param('id') id: string) {
+  @Get(':userId')
+  async getAllIncomeById(@Param('userId') userId: string) {
     try {
-      return await this.incomeHistoryService.findAll(id);
+      return await this.incomeHistoryService.findAll(userId);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete(':id')
-  async DeleteIncomeById(@Param('id') id: string) {
+  @Delete(':incomeId')
+  async DeleteIncomeById(@Param('incomeId') incomeId: string) {
     try {
-      return await this.incomeHistoryService.delete(id);
+      return await this.incomeHistoryService.delete(incomeId);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Patch(':id')
-  async UpdateIncomeById(@Param('id') id: string, @Body() data: IncomeDto) {
+  @Patch(':incomeId')
+  async UpdateIncomeById(@Param('incomeId') incomeId: string, @Body() data: IncomeDto) {
     try {
-      return await this.incomeHistoryService.update(id, data);
+      return await this.incomeHistoryService.update(incomeId, data);
     } catch (e) {
       throw new BadRequestException(e.message);
     }
   }
 
-  @Get('balance/:id')
-  async getBalanceOutcome(@Param('id') id: string) {
+  @Get('balance/:userId')
+  async getBalanceOutcome(@Param('userId') id: string) {
     try {
       return await this.incomeHistoryService.balanceIncome(id);
     } catch (e) {
