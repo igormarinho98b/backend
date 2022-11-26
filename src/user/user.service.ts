@@ -16,8 +16,9 @@ export class UserService {
     return await this.usersRepository.save(data);
   }
 
-  async getUserIdByCognitoId(id: string): Promise<any> {
-    const response = await this.usersRepository.findOne({where:{cognitoClientId:id}});
+  async getUserIdByCognitoId(email: string): Promise<any> {
+    console.log("email",email)
+    const response = await this.usersRepository.findOne({where:{email}});
     return response.id
   }
 }

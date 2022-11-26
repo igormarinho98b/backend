@@ -19,7 +19,9 @@ export class AuthController {
       const response: any = await this.authService.authenticateUser(
         authenticateRequest,
       );
-      const userId = await this.userService.getUserIdByCognitoId(response.aud);
+
+      console.log('authenticateRequest.email',authenticateRequest)
+      const userId = await this.userService.getUserIdByCognitoId(authenticateRequest.email);
       const token = response.idToken;
 
       return { token, userId };
