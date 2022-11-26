@@ -11,7 +11,7 @@ export class BalanceDetailsController {
   constructor(private balanceDetailsService: BalanceDetailsService) {}
   @UseGuards(AuthGuard('jwt'))
   @Get(':userId')
-  async findAllBalanceDetailsById(@Param('userId') userId: string): Promise<BalanceDetailsDto[]>{
+  async findAllBalanceDetailsById(@Param('userId') userId: string): Promise<BalanceDetailsDto[] | []>{
     try {
       return await this.balanceDetailsService.findAll(userId);
     } catch (e) {

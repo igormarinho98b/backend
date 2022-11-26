@@ -14,30 +14,41 @@ export class BalanceDetailsService {
     private outcomeHistoryRepository: Repository<OutcomeHistory>,
   ) { }
 
-  async findAll(userId: string): Promise<BalanceDetailsDto[]> {
+  async findAll(userId: string): Promise<BalanceDetailsDto[] | []> {
     let formatOutcomes
     let formatIncomes
     let resultoderBalances
+    let oderBalancesByDate
 
     const getOutcomes = await this.getOutcomeHistory(userId)
-
-      if(getOutcomes.length > 0){
-        formatOutcomes = this.mapperToFormatBalances(getOutcomes,'outcome')
-      }
-
     const getIncomes = await this.getIncomeHistory(userId)
 
-      if(getIncomes.length > 0){
-         formatIncomes = this.mapperToFormatBalances(getIncomes,'income')
-      }
+  
     
-    resultoderBalances = formatOutcomes.concat(formatIncomes)
-
-    const oderBalancesByDate = resultoderBalances.sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+    if(getOutcomes.length > 0 && getIncomes.length > 0){
+      formatOutcomes = this.mapperToFormatBalances(getOutcomes,'outcome')
+      formatIncomes = this.mapperToFormatBalances(getIncomes,'income')
+      resultoderBalances = formatOutcomes.concat(formatIncomes)
+      oderBalancesByDate = resultoderBalances.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      return oderBalancesByDate
+    }
     
-    return oderBalancesByDate
+    if(getOutcomes.length > 0){
+      formatOutcomes = this.mapperToFormatBalances(getOutcomes,'outcome')
+      oderBalancesByDate = formatOutcomes.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      return oderBalancesByDate
+      
+    }else{
+      formatIncomes = this.mapperToFormatBalances(getIncomes,'income')
+      oderBalancesByDate = formatIncomes.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      return oderBalancesByDate
+    }
   }
 
   private async getOutcomeHistory(id:string):Promise<OutcomeHistory[]>{
